@@ -10,14 +10,21 @@ const app = Vue.createApp({
             monsterHealth: 100,
             currentRound: 0,
             winner: null,
+            logMessage:[],
         }
     },
     computed: {
         monsterBatalBar() {
+        if (this.monsterHealth <= 0) {
+            return {width: '0%'}
+        }
             return {width: this.monsterHealth + '%'}
             
         },
         playerBatalBar() {
+           if (this.playerHealth <= 0) {
+            return {width: '0%'}
+        }
             return {width: this.playerHealth + '%'}
         },
         mayUseSpeacialAttack(){
@@ -42,15 +49,24 @@ const app = Vue.createApp({
         }
     },
     methods: {
+    startGame() {
+          this.playerHealth= 100,
+            this.monsterHealth = 100,
+            this.currentRound = 0,
+            this.winner = null,
+            this.logMessage = []
+    },
         attackMonster() {
             this.currentRound++;
             const attakValue =getRendomValue(5, 12)
             this.monsterHealth -= attakValue;
+            this.addLogMessage('player', 'attack', attakValue)
             this.attackPlayer()
         },
         attackPlayer() {
             const attakValue =getRendomValue (8, 15)
             this.playerHealth -= attakValue;
+            this.addLogMessage('monster', 'attack', attakValue)
         },
         specialAttackMonster(){
             this.currentRound++;
@@ -66,8 +82,20 @@ const app = Vue.createApp({
             this.playerHealth += healValue
          }
         //  this.attackPlayer() 
+            this.addLogMessage('player', 'heal',healValue)
 
+        },
+        surrender(){
+          return  this.winner= 'monster'
+        },
+        addLogMessage(who, what, value){
+            this.logMessage.unshift({
+                actionBy: who,
+                actionType: what,
+                actionValue: value
+            })
         }
+        
     }
 
 
