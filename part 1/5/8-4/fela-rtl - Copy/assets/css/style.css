@@ -7368,7 +7368,11 @@ article .content-feature-list li i {
 .property-desc {
   margin: 3rem 0;
 }
-
+@media  (max-width: 1400px) {
+  .header-wrap .navbar .navbar-brand img{
+    height: 60px;
+  }
+}
 @media  (max-width: 770px) {
     .property__sidebar{
           position: static !important;
