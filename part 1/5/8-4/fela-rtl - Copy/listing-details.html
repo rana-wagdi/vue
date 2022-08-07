@@ -224,6 +224,17 @@
       .carousel-container {
         margin: 2rem auto;
       }
+      
+    }
+    @media (max-width: 570px) {
+      .carousel-container {
+        margin: 2rem auto;
+      }
+      .property-desc h4{
+      text-align: center;}
+      .property-features_detail{
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -357,13 +368,10 @@
                     <li>
                       <img src="assets/img/promo-video-bg-3.jpg" alt="" class="image-of-list current-image-list" />
                     </li>
-                    <li>
-
-                      <a id="video_slider" href="./assets/media/1.mp4"> <img src="assets/img/property/property-10.jpg"
-                          class="image-of-list"></a>
-
+      
                     <li>
                       <img src="assets/img/promo-video-bg-3.jpg" alt="" class="image-of-list" />
+                      
                     </li>
                     <li>
                       <img src="assets/img/promo-video-bg-3.jpg" alt="" class="image-of-list" />
@@ -407,7 +415,7 @@
                 <div class="property-desc">
                   <!-- <h4>Property Details</h4> -->
                   <div class="row">
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6 col-4">
                       <ul class="property-features list-style">
                         <li>
                           <ion-icon name="bed-outline" class="property-icons"></ion-icon>
@@ -418,7 +426,7 @@
                       </ul>
                     </div>
 
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6 col-4">
                       <ul class="property-features list-style">
                         <li>
                           <i class="fa-solid fa-bath property-icons"></i>
@@ -430,7 +438,7 @@
                         </li>
                       </ul>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6 col-4 ">
                       <ul class="property-features list-style">
                         <li>
                           <ion-icon name="desktop-outline" class="property-icons"></ion-icon>
@@ -440,7 +448,7 @@
                         </li>
                       </ul>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6 col-4">
                       <ul class="property-features list-style">
                         <li>
                           <ion-icon name="home-outline" class="property-icons"></ion-icon>
@@ -450,7 +458,7 @@
                         </li>
                       </ul>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6 col-4">
                       <ul class="property-features list-style">
                         <li>
                           <ion-icon name="crop-outline" class="property-icons"></ion-icon>
@@ -469,14 +477,14 @@
                 <div class="property-desc">
 
                   <div class="row property-features_detail">
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6 col-6">
                       <ul class="property-features list-style">
                         <li class="property__detail__item">نوع العقار</li>
                         <li class="property__detail__item">دور</li>
                         <li class="property__detail__item">اثاث المنزل</li>
                       </ul>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6 col-6">
                       <ul class="property-features list-style">
                         <li>سكنى</li>
                         <li>2</li>
@@ -484,13 +492,13 @@
                       </ul>
                     </div>
 
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6 col-6">
                       <ul class="property-features list-style">
                         <li class="property__detail__item">الواجهة</li>
                         <li class="property__detail__item">عمر العقار</li>
                       </ul>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6 col-6">
                       <ul class="property-features list-style">
                         <li>جنوبيه</li>
                         <li>7 سنوات</li>
@@ -990,9 +998,9 @@
   // });
   const carouselContainer = document.querySelector('.carousel-container')
   const listImageArea = carouselContainer.querySelector('.next-list')
-  const listOfImages = listImageArea.querySelectorAll('img')
-  const video_slider = listImageArea.querySelector('#video_slider')
-  const currentImage = carouselContainer.querySelector('.current-image')
+  const listOfImages = listImageArea.querySelectorAll('img, video')
+  // const video_slider = listImageArea.querySelector('#video_slider')
+  const currentImage = carouselContainer.querySelector('.current-image,video,#video_slide, #video_slider')
   const arrowLeft = carouselContainer.querySelector('.arrow-left')
   const arrowRight = carouselContainer.querySelector('.arrow-right')
   const nextarrowRight = carouselContainer.querySelector('.arrow__slide_right')
@@ -1038,6 +1046,12 @@
 
 }
 
+if (currentImage.attributes.src.value == "assets/img/promo-video-bg-3.jpg"){
+  currentImage.addEventListener('click',()=>{
+    document.location.href = './assets/media/1.mp4';
+  })
+}
+
   function goToLeft() {
     var current = listImageArea.querySelector('.current-image-list')
     current.parentElement.previousElementSibling.children[0].classList.add(
@@ -1059,8 +1073,7 @@
     setTimeout(function () {
       currentImage.classList.remove('fadeIn')
     }, 500)
-    video_slider.classList.remove('current-image-list')
-    currentImage.attributes.src.value = this.attributes.src.value
+   
 
     listOfImages.forEach(function (image) {
       image.classList.remove('current-image-list')
@@ -1083,7 +1096,6 @@
   listOfImages.forEach(function (image) {
     image.addEventListener('click', changeCurrentImage)
   })
-  video_slider.addEventListener('click', changeCurrentImage)
 
 </script>
 
