@@ -39,6 +39,9 @@
     .project-page-main {
       margin-left: 70px;
     }
+    .page-wrapper{
+      overflow: hidden;
+    }
 
     .carousel-container {
       width: 90%;
@@ -60,6 +63,7 @@
       /* width: 89%;
         height: 100%; */
       object-fit: contain !important;
+      /* cursor: pointer; */
     }
 
     .next-list {
@@ -159,17 +163,27 @@
     }
 
     .arrow__slide_right {
-      right: 95px;
+      right: 110px;
     }
 
     .arrow__slide_left {
-      left: 95px;
+      left: 110px;
     }
 
     .arrow-right {
       right: 10px;
     }
-
+    .full_screen_icon{
+      background-color: #494848;
+    left: 15px;
+    top: 15px;
+    color: #fff;
+    padding: 0.4rem;
+    position: absolute;
+    border-radius: inherit;
+    font-size: 19px;
+    cursor: pointer;
+    }
     /*
  * Animations
  */
@@ -219,17 +233,34 @@
     .fadeIn {
       animation: fadeIn 0.5s ease-in-out;
     }
+  @media (min-width: 1800px) {
+      .arrow{
+      bottom: 280px;}
+    }
+    @media (max-width: 1200px) {
+      .arrow{
+      bottom: 200px;}
+        .arrow__slide_right {
+      right: 55px;
+    }
 
+    .arrow__slide_left {
+      left: 55px;
+    }
+    }
+    
     @media (max-width: 770px) {
       .carousel-container {
         margin: 2rem auto;
       }
+      
       
     }
     @media (max-width: 570px) {
       .carousel-container {
         margin: 2rem auto;
       }
+    
       .property-desc h4{
       text-align: center;}
       .property-features_detail{
@@ -357,7 +388,11 @@
                                         <span class="property-status">For Rent</span>
                                     </div> -->
                 <section class="carousel-container">
+                 <!-- <span>  </span> -->
+                 <ion-icon name="scan-outline" class="full_screen_icon"></ion-icon>
+                 <!-- <ion-icon name="crop-outline" ></ion-icon> -->
                   <img src="assets/img/promo-video-bg-3.jpg" alt="" class="current-image" />
+                 
                   <span class="arrow arrow-left">
                     <ion-icon name="chevron-forward-outline"></ion-icon>
                   </span>
@@ -970,32 +1005,32 @@
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 <script>
-  function checkOffset() {
-    var a = $(document).scrollTop() + window.innerHeight
-    var b = $('.play-video').offset().top
-    if (a < b) {
-      $('.property__sidebar').css('bottom', '10px')
-    } else {
-      $('.property__sidebar').css('bottom', 10 + (a - b) + 'px')
-    }
-  }
-  $(document).ready(checkOffset)
-  $(document).scroll(checkOffset)
-  // $(document).scroll(function() {
-  //   if ($('.property__sidebar').offset().top + $('.property__sidebar').height() >= $('.play-video').offset().top - 1)
-  //     $('.property__sidebar').css({
-  //       'position': 'absolute',
-  //       'bottom': 0,
-  //       'top': 'auto'
-  //     });
+  // function checkOffset() {
+  //   var a = $(document).scrollTop() + window.innerHeight
+  //   var b = $('.play-video').offset().top
+  //   if (a < b) {
+  //     $('.property__sidebar').css('bottom', '10px')
+  //   } else {
+  //     $('.property__sidebar').css('bottom', 10 + (a - b) + 'px')
+  //   }
+  // }
+  // $(document).ready(checkOffset)
+  // $(document).scroll(checkOffset)
+  $(document).scroll(function() {
+    if ($('.property__sidebar').offset().top + $('.property__sidebar').height() >= $('.play-video').offset().top - 1)
+      $('.property__sidebar').css({
+        'position': 'absolute',
+        'bottom': 0,
+        'top': 'auto'
+      });
 
-  //   if ($(document).scrollTop() + $('.property__sidebar').height() < $('.play-video').offset().top)
-  //     $('.property__sidebar').css({
-  //       'position': 'fixed',
-  //       'top': '100px',
-  //       'bottom': 'auto'
-  //     }); // restore when you scroll up
-  // });
+    if ($(document).scrollTop() + $('.property__sidebar').height() < $('.play-video').offset().top)
+      $('.property__sidebar').css({
+        'position': 'fixed',
+        'top': '100px',
+        'bottom': 'auto'
+      }); // restore when you scroll up
+  });
   const carouselContainer = document.querySelector('.carousel-container')
   const listImageArea = carouselContainer.querySelector('.next-list')
   const listOfImages = listImageArea.querySelectorAll('img, video')
@@ -1021,7 +1056,7 @@
     )
     current.classList.remove('current-image-list')
     current = listImageArea.querySelector('.current-image-list')
-    console.log(current.offsetLeft)
+    // console.log(current.offsetLeft)
     listImageArea.scrollLeft = (current.offsetLeft)+(current.offsetLeft)+(current.offsetLeft)
     currentImage.attributes.src.value = current.attributes.src.value
     currentImage.classList.add('slideInFromRight')
@@ -1035,22 +1070,25 @@
 
   function nextRight(){
    
-			document.querySelector('.next-list').scrollLeft -= 180
-	
+	let scrollLeftValue =	document.querySelector('.next-list').scrollLeft += 180
+	if (scrollLeftValue == 180){
+	   nextarrowRight.style.cursor = 'no-drop'
+	}
 
   }
   function nextLeft(){
-   
-   document.querySelector('.next-list').scrollLeft += 180
+   nextarrowRight.style.cursor = 'pointer'
+ let scrollRightValue = document.querySelector('.next-list').scrollLeft -= 180
+
 
 
 }
 
-if (currentImage.attributes.src.value == "assets/img/promo-video-bg-3.jpg"){
-  currentImage.addEventListener('click',()=>{
-    document.location.href = './assets/media/1.mp4';
-  })
-}
+// if (currentImage.attributes.src.value == "assets/img/promo-video-bg-3.jpg"){
+//   currentImage.addEventListener('click',()=>{
+//     document.location.href = './assets/media/1.mp4';
+//   })
+// }
 
   function goToLeft() {
     var current = listImageArea.querySelector('.current-image-list')

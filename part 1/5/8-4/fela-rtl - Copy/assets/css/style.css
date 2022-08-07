@@ -7332,7 +7332,8 @@ article .content-feature-list li i {
 }
 .property__sidebar {
   position: fixed;
-  padding: 20px;
+
+  padding:  20px;
   /* top: 100px;  */
 }
 .property-features_item {
@@ -7373,12 +7374,21 @@ article .content-feature-list li i {
     height: 60px;
   }
 }
-@media  (max-width: 770px) {
+
+@media  (max-width: 1400px) {
     .property__sidebar{
+        margin: -2rem 0 !important;
+    }
+}
+
+@media  (max-width: 770px) {
+          .property__sidebar{
+
           position: static !important;
+          
       }
       .property__sidebar{
-        /* background-color: #ddd; */
+        margin-bottom: 2rem !important;
       }
       .breadcrumb-wrap {
         padding: 80px 0 0  !important;
