@@ -1,8 +1,9 @@
-import Vue from 'vue'
-import App from './App.vue'
 
-Vue.config.productionTip = false
+import { createApp } from 'vue';
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+import App from './App.vue';
+import FriendContact from './components/FriendContact.vue'
+
+const app = createApp(App)
+app.component('FriendContact', FriendContact)
+app.mount('#app');
