@@ -21,8 +21,8 @@ export default {
   // ],
   props: {
     id: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     name: {
       type: String,
@@ -41,11 +41,11 @@ export default {
       required: false,
     },
   },
+  emits: ['toggle-favorite'],
   data() {
     return {
       detalisVisable: false,
 
-  
       // friendIsFavorite: this.isFavorite,
     };
   },
