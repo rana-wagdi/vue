@@ -3,6 +3,7 @@
     <h2>{{ name }} {{ isFavorite == true ? "(Favorite)" : "" }}</h2>
     <button @click="toggleFavorite">toggle favorite</button>
     <button @click="toggleDetailsVisable">ShowDetails</button>
+    <button @click="deleteFriend">close</button>
     <ul v-if="detalisVisable">
       <li>Phone Number: {{ phoneNumber }}</li>
       <li>Email: {{ emailAddress }}</li>
@@ -41,12 +42,10 @@ export default {
       required: false,
     },
   },
-  emits: ['toggle-favorite'],
+  emits: ["toggle-favorite", "delete-friend"],
   data() {
     return {
       detalisVisable: false,
-
-      // friendIsFavorite: this.isFavorite,
     };
   },
 
@@ -56,12 +55,12 @@ export default {
     },
     toggleFavorite() {
       this.$emit("toggle-favorite", this.id);
-      // if(this.friendIsFavorite === '1'){
-      //   this.friendIsFavorite == '0'
-      // }else {
-      //   this.friendIsFavorite == '1'
-      // }
-      // this.isFavorite = !this.isFavorite
+    },
+    
+    deleteFriend() {
+      this.$emit('delete-friend', this.id)
+      
+      // alert("aa")
     },
   },
 };

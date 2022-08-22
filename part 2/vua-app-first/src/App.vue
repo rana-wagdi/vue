@@ -14,6 +14,7 @@
         :email-address="friend.email"
         :is-favorite="friend.isFavorite"
         @toggle-favorite="toggleFavoriteStatus"
+        @delete-friend="deleteFriend"
       ></FriendContact>
       <!-- <FriendContact name="Nada Karam" phone-number="0111323456" email-address="nada@example.com" is-favorite="0"></FriendContact> -->
     </ul>
@@ -49,6 +50,7 @@ export default {
       const identifiedFriend = this.friends.find(
         (friend) => friend.id === friendId
       );
+      // console.log(identifiedFriend)
       identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
     },
     addContact(name, phone, email){
@@ -60,7 +62,22 @@ export default {
         isFavorite: false
       }
       this.friends.push(newFriendContent)
+    },
+    deleteFriend(friendId){
+      const dF = this.friends.find((removeFriendId)=> 
+          removeFriendId.id === friendId
+      )
+      let indexFriend = this.friends.indexOf(dF)
+      if(confirm("Are You Sure about delete this Friend :(( ") == true){
+         this.friends.splice(indexFriend,1)
+         alert("I hope you are happy now")
+      }else {
+        alert("You are a good friend :)")
+      }
+   
+
     }
+    
   },
   components: { FriendContact, NewFriend },
 };
