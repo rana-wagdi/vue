@@ -50,7 +50,6 @@ export default {
       const identifiedFriend = this.friends.find(
         (friend) => friend.id === friendId
       );
-      // console.log(identifiedFriend)
       identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
     },
     addContact(name, phone, email){
