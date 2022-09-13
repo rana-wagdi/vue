@@ -1,11 +1,13 @@
 <template>
     <base-card>
-        <base-button @click="setSelectedTabs('stored-rsourses')">stored Resourses</base-button>
-        <base-button @click="setSelectedTabs('AddResourses')">Add Resourses</base-button>
+        <base-button @click="setSelectedTabs('stored-rsourses')" :mode ="storedButton">stored Resourses</base-button>
+        <base-button @click="setSelectedTabs('AddResourses')" :mode ="addButton">Add Resourses</base-button>
         
  
     </base-card>
+    <keep-alive>
     <component :is="selectedTab"></component>
+    </keep-alive>
 </template>
 
 <script>
@@ -45,12 +47,32 @@ export default {
     },
     provide () {
         return {
-            resourses: this.storedRsourses
+            resourses: this.storedRsourses,
+            addResource: this.addResourses
         }
+    },
+    computed: {
+        storedButton() {
+            return this.selectedTab === 'stored-rsourses' ? null : 'flat' ;
+        },
+        addButton() {
+            return this.selectedTab === 'AddResourses' ? null : 'flat' ;
+        }
+        
     },
     methods: {
         setSelectedTabs(tab){
             this.selectedTab = tab
+        },
+        addResourses(title, description , url){
+            const newResourses = {
+                id: new Date().toISOString(),
+                title: title,
+                description:description,
+                link:url
+            }
+            this.storedRsourses.unshift(newResourses)
+            this.selectedTab = 'stored-rsourses'
         }
     }
 }
