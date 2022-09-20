@@ -48,6 +48,9 @@
       </div>
     </div>
     <div class="form-control">
+    <RatingControl></RatingControl>
+    </div>
+    <div class="form-control">
      <input id="confirm-terms" name="confirm-terms" type="checkbox" v-model="confirm" />
         <label for="confirm-terms">Agree of trems we use?</label>
     </div>
@@ -57,37 +60,41 @@
   </form>
 </template>
 <script>
+import RatingControl from './RatingControl.vue'
   export default{
-  data(){
-  return {
-    userName: '',
-    useAge: null,
-    reffere: '',
-    interest:[],
-    how:null,
-    confirm:false,
-    userNameValid:'padding'
-  }
-  },
-   methods: {
-    submitData(){
-    console.log(this.userName)
-    this.userName= ''
-    console.log(this.useAge)
-    this.useAge= null
-    console.log(this.reffere)
-    console.log(this.interest)
-    console.log(this.how)
-    console.log(this.confirm)
+    data() {
+        return {
+            userName: "",
+            useAge: null,
+            reffere: "",
+            interest: [],
+            how: null,
+            confirm: false,
+            userNameValid: "padding"
+        };
     },
-    validateInput(){
-      if(this.userName === ''){
-        this.userNameValid = "invalid"
-      }else {
-      this.userNameValid= 'valid'}
-    }
-   },
-  }
+    methods: {
+        submitData() {
+            console.log(this.userName);
+            this.userName = "";
+            console.log(this.useAge);
+            this.useAge = null;
+            console.log(this.reffere);
+            console.log(this.interest);
+            console.log(this.how);
+            console.log(this.confirm);
+        },
+        validateInput() {
+            if (this.userName === "") {
+                this.userNameValid = "invalid";
+            }
+            else {
+                this.userNameValid = "valid";
+            }
+        }
+    },
+    components: { RatingControl }
+}
 </script>
 <style scoped>
 form {

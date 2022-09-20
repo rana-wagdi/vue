@@ -30,7 +30,7 @@
     <!-- <button @click="addTask">I Got This!</button> -->
     <!-- </form> -->
     <ul>
-      <li v-for="list in todoLists" :key="list.id">
+      <li class="task_list" v-for="list in todoLists" :key="list.id">
         {{ list.task }} <span @click="removeTask(list.id)">X</span>
       </li>
     </ul>
@@ -114,9 +114,24 @@ export default {
   padding: 0.5rem 0.9rem;
   width:100%;
   border-radius: 5px;
-  margin: 0 0.9rem;
+  /* margin: 0 0.9rem; */
   color: hsl(236, 9%, 61%);
   /* padding: 4rem auto ; */
+}
+.task_list{
+    display: flex;
+  background-color: hsl(235, 24%, 19%);
+  border: none;
+  padding: 0.5rem 0.9rem;
+  width:100%;
+  /* border-radius: 5px; */
+  border-bottom: 1px solid #393a4c;
+
+  /* margin: 0 0.9rem; */
+  color: hsl(236, 9%, 61%);
+}
+ul{
+  margin-top: 2rem;
 }
 .circle_goal{
     max-width: 56px;
