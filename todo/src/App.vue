@@ -27,9 +27,10 @@ export default {
 .content {
     /* background-attachment: fixed; */
     text-align: center;
-    /* background-color: hsl(235, 21%, 11%); */
+    background-color: hsl(235, 21%, 11%);
     position: relative;
     justify-content: center;
+    height: 100vh;
 }
 .header__todo {
   background-image: url("./assets/bg-desktop-dark.jpg");

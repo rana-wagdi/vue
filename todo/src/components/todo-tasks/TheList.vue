@@ -1,3 +1,4 @@
+
 <template>
   <div class="todo__content">
     <header class="header_todo">
@@ -5,18 +6,13 @@
         <h1>TODO</h1>
       </div>
       <div>
-        <!-- <i class="bi bi-brightness-high-fill"></i> -->
-
         <i class="bi bi-brightness-high-fill theme_icon"></i>
       </div>
     </header>
-    <!-- <form> -->
-
     <div class="goal">
       <div @click="resetTask" class="circle_goal">
         <span class="circle_goal_item"></span>
       </div>
-      <!-- <input class="goalCheck" type="checkbox"> -->
 
       <input
         class="goal"
@@ -30,14 +26,26 @@
     <!-- <button @click="addTask">I Got This!</button> -->
     <!-- </form> -->
     <ul>
+
       <li class="task_list" v-for="list in todoLists" :key="list.id">
-        {{ list.task }} <span @click="removeTask(list.id)"><i class="bi bi-x-circle"></i></span>
+      <div class="task_list_content">
+      <input class="goalCheck" type="checkbox">
+      <span class="task_list_text">{{ list.task }}</span>
+      </div>
+       <span @click="removeTask(list.id)"><i class="bi bi-x-circle close_icon"></i></span>
       </li>
+   
     </ul>
   </div>
 </template>
+
 <script>
-export default {
+// import Draggable from "../../../node_modules/vue3-draggable";
+
+export default {  
+components: {
+    // Draggable
+  },
   data() {
     return {
       todoLists: [
@@ -109,6 +117,10 @@ export default {
   letter-spacing: 0.8rem;
   margin-bottom: 3rem;
 }
+li{
+display: flex;
+justify-content: space-between;
+}
 .goal {
   display: flex;
   background-color: hsl(235, 24%, 19%);
@@ -120,11 +132,14 @@ export default {
   color: hsl(236, 9%, 61%);
   /* padding: 4rem auto ; */
 }
+.task_list_content{
+  position: relative;
+}
 .task_list {
   display: flex;
   background-color: hsl(235, 24%, 19%);
   border: none;
-  padding: 0.5rem 0.9rem;
+  padding: 1rem 0.9rem;
   width: 100%;
   /* border-radius: 5px; */
   border-bottom: 1px solid #393a4c;
@@ -132,8 +147,33 @@ export default {
   /* margin: 0 0.9rem; */
   color: hsl(236, 9%, 61%);
 }
+.task_list:first-child{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.task_list:last-child{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.task_list_text{
+  margin: 0.5rem 1rem;
+  font-size: 1.3rem;
+  color: hsl(236, 33%, 92%);
+  cursor: pointer;
+}
+.close_icon{
+  padding-top: 0.4rem;
+  display: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  /* display: block; */
+}
+
+.task_list:hover .close_icon {
+  display: block !important;
+}
 ul {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 .circle_goal {
   max-width: 56px;
@@ -157,8 +197,6 @@ ul {
 }
 input:focus {
   outline: none !important;
-  /* border:1px solid red;
-    box-shadow: 0 0 10px #719ECE; */
   color: #fff;
 }
 .goalCheck {
@@ -167,8 +205,9 @@ input:focus {
 .goalCheck[type="checkbox"] {
   width: 1.5rem;
   height: 1.5rem;
-  color: dodgerblue;
-  vertical-align: middle;
+  color: hsl(236, 9%, 61%);
+  /* vertical-align: middle; */
+  vertical-align: sub;
   -webkit-appearance: none;
   background: none;
   border: 1px solid;
@@ -181,17 +220,18 @@ input:focus {
   cursor: pointer;
   margin-top: 0.5rem;
 }
+.goalCheck[type="checkbox"]:hover{
+  color:   hsl(192, 100%, 67%);
+}
 [type="checkbox"]::before {
   content: "";
-  /* color: transparent; */
   display: block;
   width: inherit;
   height: inherit;
   border-radius: inherit;
   border: 0;
-  /* background-color: blue; */
   background-size: contain;
-  /* box-shadow: inset 0 0 0 1px #CCD3D8; */
+
 }
 [type="checkbox"]:checked::before {
   box-shadow: none;
