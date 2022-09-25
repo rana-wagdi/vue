@@ -131,9 +131,7 @@ cursor: pointer;
   padding: 0.5rem 0.9rem;
   width: 100%;
   border-radius: 5px;
-  /* margin: 0 0.9rem; */
   color: hsl(236, 9%, 61%);
-  /* padding: 4rem auto ; */
 }
 .task_list_content{
   position: relative;
@@ -144,10 +142,7 @@ cursor: pointer;
   border: none;
   padding: 1rem 0.9rem;
   width: 100%;
-  /* border-radius: 5px; */
   border-bottom: 1px solid #393a4c;
-
-  /* margin: 0 0.9rem; */
   color: hsl(236, 9%, 61%);
 }
 .task_list:first-child{
