@@ -27,6 +27,7 @@
     <!-- </form> -->
     <ul>
 
+  <draggable>
       <li class="task_list" v-for="list in todoLists" :key="list.id">
       <div class="task_list_content">
       <input class="goalCheck" type="checkbox">
@@ -34,17 +35,19 @@
       </div>
        <span @click="removeTask(list.id)"><i class="bi bi-x-circle close_icon"></i></span>
       </li>
-   
+      </draggable>
     </ul>
   </div>
 </template>
 
 <script>
-// import Draggable from "../../../node_modules/vue3-draggable";
+
+import draggable from 'vuedraggable';
 
 export default {  
+
 components: {
-    // Draggable
+   draggable
   },
   data() {
     return {
@@ -68,7 +71,6 @@ components: {
   methods: {
     addTask() {
       const enterValue = this.$refs.goal.value;
-      // console.log(enterValue);
       if (this.enterGoal.length > 1) {
         this.todoLists.push({
           id: new Date().toISOString(),
@@ -77,7 +79,7 @@ components: {
       } else {
         alert("Please Insert Some Goals");
       }
-      this.enterGoal = " ";
+      this.enterGoal = "";
     },
     removeTask(taskId) {
       const getTaskId = this.todoLists.find((ele) => ele.id == taskId);
@@ -120,6 +122,7 @@ components: {
 li{
 display: flex;
 justify-content: space-between;
+cursor: pointer;
 }
 .goal {
   display: flex;
@@ -239,7 +242,10 @@ input:focus {
   /* background-image: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%); */
   /* background-image:  linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%)); */
 }
-
+.goalCheck[type="checkbox"]:checked ~ .task_list_text{
+  opacity: 0.2;
+  text-decoration: line-through;
+}
 [type="checkbox"]:checked {
   background-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
 }

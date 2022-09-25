@@ -1,7 +1,8 @@
-import { createApp } from 'vue'
+// import { createApp } from 'vue'
 import App from './App.vue';
-
-
+import Vue from 'vue';
+import VueDragAndDropList from 'vue-drag-and-drop-list';
+Vue.use(VueDragAndDropList);
 // import Vue from 'vue'
 // // import "../node_modules/bootstrap/scss/bootstrap";
 // import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
@@ -15,4 +16,12 @@ import App from './App.vue';
 // // Optionally install the BootstrapVue icon components plugin
 // Vue.use(IconsPlugin)
 
-createApp(App).mount('#app')
+Vue.config.productionTip = false;
+
+new Vue({
+  render: (h) => h(App),
+}).$mount("#app");
+// Vue.config.productionTip = false Vue({
+// render: h => h(App),
+// }).$mount('#app')
+// createApp(App).mount('#app')

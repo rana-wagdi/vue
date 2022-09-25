@@ -11,7 +11,8 @@
     "bootstrap": "^5.2.1",
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.8.3",
-    "vue": "^3.2.39",
+    "vue": "^2.7.10",
+    "vue-drag-and-drop-list": "^1.0.0",
     "vue3-draggable": "^2.0.9",
     "vuedraggable": "^2.24.3"
   },
