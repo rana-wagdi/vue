@@ -26,28 +26,28 @@
     <!-- <button @click="addTask">I Got This!</button> -->
     <!-- </form> -->
     <ul>
-
-  <draggable>
-      <li class="task_list" v-for="list in todoLists" :key="list.id">
-      <div class="task_list_content">
-      <input class="goalCheck" type="checkbox">
-      <span class="task_list_text">{{ list.task }}</span>
-      </div>
-       <span @click="removeTask(list.id)"><i class="bi bi-x-circle close_icon"></i></span>
-      </li>
+      <draggable>
+        <li class="task_list" v-for="list in todoLists" :key="list.id">
+          <div class="task_list_content">
+            <input class="goalCheck" :value="list.id"  type="checkbox" v-model="checkedNames" />
+            <span class="task_list_text">{{ list.task }}</span>
+          </div>
+          <span @click="removeTask(list.id)"
+            ><i class="bi bi-x-circle close_icon"></i
+          ></span>
+        </li>
+        <p class="task_list">{{ itemLength }} items left</p>
       </draggable>
     </ul>
   </div>
 </template>
 
 <script>
+import draggable from "vuedraggable";
 
-import draggable from 'vuedraggable';
-
-export default {  
-
-components: {
-   draggable
+export default {
+  components: {
+    draggable,
   },
   data() {
     return {
@@ -66,6 +66,9 @@ components: {
         },
       ],
       enterGoal: "",
+
+      itemLength: "",
+      checkedNames: [],
     };
   },
   methods: {
@@ -83,25 +86,69 @@ components: {
     },
     removeTask(taskId) {
       const getTaskId = this.todoLists.find((ele) => ele.id == taskId);
+      console.log(taskId)
       const todoELePosition = this.todoLists.indexOf(getTaskId);
+      console.log("as", taskId.checked)
+            let checkGoall = document.querySelectorAll(".goalCheck");
+
+      for(var i = 0 ; i <= checkGoall.length-1; i++){
+        var checkboox = checkGoall[i]
+              if(checkboox.checked){
+                if(checkboox.value == taskId){
+                  this.itemLength = 5
+                  console.log(this.itemLength)
+                }
+              }
+
+      }
+      // for 
+      // for (var i=0; i<ChkboxPartA_value.length; i++) {
+//   var checkbox = ChkboxPartA_value[i];
+//   if (checkbox.checked)
+//     checkboxPartA = checkbox.value.append(checkbox.value + ' , ');            
+// }
+      //   if(taskId.checked){
+      //   alert("a")
+      // }
       this.todoLists.splice(todoELePosition, 1);
+    
     },
     resetTask() {
       this.enterGoal = "";
     },
+    listLength() {
+      let checkGoal = document.querySelectorAll(".goalCheck");
+      console.log(checkGoal.length);
+    },
+  },
+  mounted() {
+    let checkGoal = document.querySelectorAll(".goalCheck");
+    this.itemLength = checkGoal.length;
+  },
+  updated() {
+    let checkGoal = document.querySelectorAll(".goalCheck");
+    
+      // if()
+    
+    this.itemLength = checkGoal.length - this.checkedNames.length;
+        // this.itemLength = checkGoal.length - this.checkedNames.length;
+
+// console.log("Aa",checkGoal.length - this.checkedNames.length)
+    // if(this.itemLength < 0 )
+    //  this.itemLength===0
   },
 };
 </script>
 <style scoped>
 .todo__content {
-    width: 40%;
-    margin: auto;
-    text-align: left;
-    padding: 5rem 0 1rem 0;
-    font-family: "Josefin Sans", sans-serif;
-    position: absolute;
-    top: 30px;
-    left: 30%;
+  width: 40%;
+  margin: auto;
+  text-align: left;
+  padding: 5rem 0 1rem 0;
+  font-family: "Josefin Sans", sans-serif;
+  position: absolute;
+  top: 30px;
+  left: 30%;
 }
 .header_todo {
   color: #fff;
@@ -119,10 +166,10 @@ components: {
   letter-spacing: 0.8rem;
   margin-bottom: 3rem;
 }
-li{
-display: flex;
-justify-content: space-between;
-cursor: pointer;
+li {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
 }
 .goal {
   display: flex;
@@ -133,7 +180,7 @@ cursor: pointer;
   border-radius: 5px;
   color: hsl(236, 9%, 61%);
 }
-.task_list_content{
+.task_list_content {
   position: relative;
 }
 .task_list {
@@ -145,21 +192,21 @@ cursor: pointer;
   border-bottom: 1px solid #393a4c;
   color: hsl(236, 9%, 61%);
 }
-.task_list:first-child{
+.task_list:first-child {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.task_list:last-child{
+.task_list:last-child {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-.task_list_text{
+.task_list_text {
   margin: 0.5rem 1rem;
   font-size: 1.3rem;
   color: hsl(236, 33%, 92%);
   cursor: pointer;
 }
-.close_icon{
+.close_icon {
   padding-top: 0.4rem;
   display: none;
   cursor: pointer;
@@ -218,8 +265,8 @@ input:focus {
   cursor: pointer;
   margin-top: 0.5rem;
 }
-.goalCheck[type="checkbox"]:hover{
-  color:   hsl(192, 100%, 67%);
+.goalCheck[type="checkbox"]:hover {
+  color: hsl(192, 100%, 67%);
 }
 [type="checkbox"]::before {
   content: "";
@@ -229,7 +276,6 @@ input:focus {
   border-radius: inherit;
   border: 0;
   background-size: contain;
-
 }
 [type="checkbox"]:checked::before {
   box-shadow: none;
@@ -237,7 +283,7 @@ input:focus {
   /* background-image: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%); */
   /* background-image:  linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%)); */
 }
-.goalCheck[type="checkbox"]:checked ~ .task_list_text{
+.goalCheck[type="checkbox"]:checked ~ .task_list_text {
   opacity: 0.2;
   text-decoration: line-through;
 }
