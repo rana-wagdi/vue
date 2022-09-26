@@ -95,7 +95,7 @@ export default {
         var checkboox = checkGoall[i]
               if(checkboox.checked){
                 if(checkboox.value == taskId){
-                  this.itemLength = 5
+                  this.itemLength = this.itemLength + 5
                   console.log(this.itemLength)
                 }
               }
