@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     addTask() {
-      const enterValue = this.$refs.goal.value;
+    const enterValue = this.$refs.goal.value;
       if (this.enterGoal.length > 1) {
         this.todoLists.push({
           id: new Date().toISOString(),
@@ -92,10 +92,10 @@ export default {
             let checkGoall = document.querySelectorAll(".goalCheck");
 
       for(var i = 0 ; i <= checkGoall.length-1; i++){
-        var checkboox = checkGoall[i]
-              if(checkboox.checked){
-                if(checkboox.value == taskId){
-                  this.itemLength = this.itemLength + 5
+        var checkBoox = checkGoall[i]
+              if(checkBoox.checked){
+                if(checkBoox.value == taskId){
+                  this.itemLength = 10
                   console.log(this.itemLength)
                 }
               }
@@ -130,7 +130,7 @@ export default {
     
       // if()
     
-    this.itemLength = checkGoal.length - this.checkedNames.length;
+    this.itemLength = checkGoal.length;
         // this.itemLength = checkGoal.length - this.checkedNames.length;
 
 // console.log("Aa",checkGoal.length - this.checkedNames.length)
@@ -211,7 +211,6 @@ li {
   display: none;
   cursor: pointer;
   font-size: 1.3rem;
-  /* display: block; */
 }
 
 .task_list:hover .close_icon {

@@ -1,8 +1,10 @@
-<template >
+<template class="drag">
   <div class="content">
     <header>
       <div class="header__todo"></div>
+      
     </header>
+    <p class="drag">Drag and drop to reoder list</p>
     <the-list />
   </div>
 </template>
@@ -30,7 +32,15 @@ export default {
     background-color: hsl(235, 21%, 11%);
     position: relative;
     justify-content: center;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
+}
+.drag{
+  margin-bottom: 4rem;
+  color: aliceblue;
+    background-color: hsl(235, 21%, 11%);
+  
+  /* z-index: 4555555555555; */
 }
 .header__todo {
   background-image: url("./assets/bg-desktop-dark.jpg");
