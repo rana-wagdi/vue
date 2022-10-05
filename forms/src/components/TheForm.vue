@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="form-control">
-    <RatingControl></RatingControl>
+    <RatingControl v-model="rating" ></RatingControl>
     </div>
     <div class="form-control">
      <input id="confirm-terms" name="confirm-terms" type="checkbox" v-model="confirm" />
@@ -70,7 +70,8 @@ import RatingControl from './RatingControl.vue'
             interest: [],
             how: null,
             confirm: false,
-            userNameValid: "padding"
+            userNameValid: "padding",
+            rating: null
         };
     },
     methods: {
@@ -83,6 +84,7 @@ import RatingControl from './RatingControl.vue'
             console.log(this.interest);
             console.log(this.how);
             console.log(this.confirm);
+            console.log("rating", this.rating)
         },
         validateInput() {
             if (this.userName === "") {
