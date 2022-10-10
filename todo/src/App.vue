@@ -1,11 +1,12 @@
 <template class="drag">
-  <div class="content">
-    <header>
-      <div class="header__todo"></div>
-      
-    </header>
-    <p class="drag">Drag and drop to reoder list</p>
-    <the-list />
+  <div :class="mode">
+    <div class="content">
+      <header>
+        <div class="header__todo"></div>
+      </header>
+      <!-- <p class="drag">Drag and drop to reoder list</p> -->
+      <the-list :modeTheme="mode" />
+    </div>
   </div>
 </template>
 
@@ -14,10 +15,20 @@ import TheList from "./components/todo-tasks/TheList.vue";
 
 export default {
   name: "App",
-  components: {
+    components: {
     TheList,
   },
-};
+  data() {
+    return {
+      mode: "dark",
+    };
+  },
+   provide() {
+    return {
+      mode: this.mode
+    };
+}
+}
 </script>
 
 <style>
@@ -27,27 +38,29 @@ export default {
   font-family: "Josefin Sans", sans-serif;
 }
 .content {
-    /* background-attachment: fixed; */
-    text-align: center;
-    background-color: hsl(235, 21%, 11%);
-    position: relative;
-    justify-content: center;
-    height: auto;
-    min-height: 100vh;
+  text-align: center;
+  position: relative;
+  justify-content: center;
+  height: auto;
+  min-height: 100vh;
 }
-.drag{
+.drag {
   margin-bottom: 4rem;
   color: aliceblue;
-    background-color: hsl(235, 21%, 11%);
-  
-  /* z-index: 4555555555555; */
+  background-color: hsl(235, 21%, 11%);
 }
 .header__todo {
   background-image: url("./assets/bg-desktop-dark.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top;
-    height: 40vh;
-    z-index: 1111;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  height: 40vh;
+  z-index: 1111;
+}
+.dark {
+  background-color: hsl(235, 21%, 11%);
+}
+.light {
+  background-color: #fff;
 }
 </style>

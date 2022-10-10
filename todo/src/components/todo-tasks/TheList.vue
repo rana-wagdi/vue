@@ -1,19 +1,19 @@
 
 <template>
-  <div class="todo__content">
+  <div class="todo__content ">
     <header class="header_todo">
       <div>
         <h1>TODO</h1>
       </div>
       <div>
-        <i class="bi bi-brightness-high-fill theme_icon"></i>
+        <i @click="themeMode" class="bi bi-brightness-high-fill theme_icon"></i>
+        <!-- <i class="bi bi-moon"></i> -->
       </div>
     </header>
     <div class="goal">
       <div @click="resetTask" class="circle_goal">
         <span class="circle_goal_item"></span>
       </div>
-
       <input
         class="goal"
         type="text"
@@ -23,13 +23,16 @@
         @keyup.enter="addTask"
       />
     </div>
-    <!-- <button @click="addTask">I Got This!</button> -->
-    <!-- </form> -->
     <ul>
       <draggable>
         <li class="task_list" v-for="list in todoLists" :key="list.id">
           <div class="task_list_content">
-            <input class="goalCheck" :value="list.id"  type="checkbox" v-model="checkedNames" />
+            <input
+              class="goalCheck"
+              :value="list.id"
+              type="checkbox"
+              v-model="checkedNames"
+            />
             <span class="task_list_text">{{ list.task }}</span>
           </div>
           <span @click="removeTask(list.id)"
@@ -46,6 +49,7 @@
 import draggable from "vuedraggable";
 
 export default {
+props: ['modeTheme'],
   components: {
     draggable,
   },
@@ -73,7 +77,7 @@ export default {
   },
   methods: {
     addTask() {
-    const enterValue = this.$refs.goal.value;
+      const enterValue = this.$refs.goal.value;
       if (this.enterGoal.length > 1) {
         this.todoLists.push({
           id: new Date().toISOString(),
@@ -86,32 +90,21 @@ export default {
     },
     removeTask(taskId) {
       const getTaskId = this.todoLists.find((ele) => ele.id == taskId);
-      console.log(taskId)
+      console.log(taskId);
       const todoELePosition = this.todoLists.indexOf(getTaskId);
-      console.log("as", taskId.checked)
-            let checkGoall = document.querySelectorAll(".goalCheck");
+      console.log("as", taskId.checked);
+      let checkGoall = document.querySelectorAll(".goalCheck");
 
-      for(var i = 0 ; i <= checkGoall.length-1; i++){
-        var checkBoox = checkGoall[i]
-              if(checkBoox.checked){
-                if(checkBoox.value == taskId){
-                  this.itemLength = 10
-                  console.log(this.itemLength)
-                }
-              }
-
+      for (var i = 0; i <= checkGoall.length - 1; i++) {
+        var checkBoox = checkGoall[i];
+        if (checkBoox.checked) {
+          if (checkBoox.value == taskId) {
+            this.itemLength = 10;
+            console.log(this.itemLength);
+          }
+        }
       }
-      // for 
-      // for (var i=0; i<ChkboxPartA_value.length; i++) {
-//   var checkbox = ChkboxPartA_value[i];
-//   if (checkbox.checked)
-//     checkboxPartA = checkbox.value.append(checkbox.value + ' , ');            
-// }
-      //   if(taskId.checked){
-      //   alert("a")
-      // }
       this.todoLists.splice(todoELePosition, 1);
-    
     },
     resetTask() {
       this.enterGoal = "";
@@ -120,6 +113,9 @@ export default {
       let checkGoal = document.querySelectorAll(".goalCheck");
       console.log(checkGoal.length);
     },
+    themeMode(){
+      console.log(this.modeTheme);
+    }
   },
   mounted() {
     let checkGoal = document.querySelectorAll(".goalCheck");
@@ -127,15 +123,7 @@ export default {
   },
   updated() {
     let checkGoal = document.querySelectorAll(".goalCheck");
-    
-      // if()
-    
     this.itemLength = checkGoal.length;
-        // this.itemLength = checkGoal.length - this.checkedNames.length;
-
-// console.log("Aa",checkGoal.length - this.checkedNames.length)
-    // if(this.itemLength < 0 )
-    //  this.itemLength===0
   },
 };
 </script>
