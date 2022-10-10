@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="form-control">
-    <RatingControl v-model="rating" ></RatingControl>
+    <RatingControl v-model="rating"></RatingControl>
     </div>
     <div class="form-control">
      <input id="confirm-terms" name="confirm-terms" type="checkbox" v-model="confirm" />

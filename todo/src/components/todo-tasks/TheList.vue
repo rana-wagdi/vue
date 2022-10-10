@@ -6,7 +6,7 @@
         <h1>TODO</h1>
       </div>
       <div>
-        <i @click="themeMode" class="bi bi-brightness-high-fill theme_icon"></i>
+        <i @click="themeMode('light')" class="bi bi-brightness-high-fill theme_icon"></i>
         <!-- <i class="bi bi-moon"></i> -->
       </div>
     </header>
@@ -50,6 +50,7 @@ import draggable from "vuedraggable";
 
 export default {
 props: ['modeTheme'],
+emits:['updated:modeTheme'],
   components: {
     draggable,
   },
@@ -73,6 +74,7 @@ props: ['modeTheme'],
 
       itemLength: "",
       checkedNames: [],
+      themeColor: this.modeTheme
     };
   },
   methods: {
@@ -113,8 +115,11 @@ props: ['modeTheme'],
       let checkGoal = document.querySelectorAll(".goalCheck");
       console.log(checkGoal.length);
     },
-    themeMode(){
-      console.log(this.modeTheme);
+    
+    themeMode(option){
+    this.themeColor = option
+    this.$emit('updated:modeTheme',option)
+    console.log("l", this.modeTheme)
     }
   },
   mounted() {

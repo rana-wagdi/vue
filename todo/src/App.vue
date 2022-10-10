@@ -5,7 +5,7 @@
         <div class="header__todo"></div>
       </header>
       <!-- <p class="drag">Drag and drop to reoder list</p> -->
-      <the-list :modeTheme="mode" />
+      <the-list v-bind="mode" />
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@ import TheList from "./components/todo-tasks/TheList.vue";
 
 export default {
   name: "App",
-    components: {
+  components: {
     TheList,
   },
   data() {
@@ -23,12 +23,15 @@ export default {
       mode: "dark",
     };
   },
-   provide() {
+  provide() {
     return {
-      mode: this.mode
+      mode: this.mode,
     };
-}
-}
+
+  },
+  
+    
+};
 </script>
 
 <style>
