@@ -10,9 +10,9 @@ import NotFound from './components/nav/NotFound.vue'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    {path: '/', redirect: '/teams'},
+    { path: '/', redirect: '/teams' },
     {
-    name: 'teams',
+      name: 'teams',
       path: '/teams', component: TeamsList, children: [
         { name: 'team-members', path: ':teamId', component: TeamMembers, props: true }
       ]
@@ -22,6 +22,14 @@ const router = createRouter({
     { path: '/:notFound(.*)', component: NotFound }
     // {path: '/:notFound(.*)' , redirect: '/teams'}
   ],
+  linkActiveClass: 'active',
+  // scrollBehavior(to, from, savedPosition){
+  //   // console.log(to, from, savedPosition)
+  //   if(savedPosition){
+  //     return savedPosition
+  //   } 
+  //   return {left: 0, top:0}
+  // }
 });
 
 const app = createApp(App);
