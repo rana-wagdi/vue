@@ -10,12 +10,17 @@ import NotFound from './components/nav/NotFound.vue'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-  // {path: '/', redirect: '/teams'}
-  { path: '/teams', component: TeamsList , alias: '/'},
-  { path: '/users' , component: UserList },
-  { path: '/teams/:teamId', component: TeamMembers, props: true},
-  { path: '/:notFound(.*)', component: NotFound}
-  // {path: '/:notFound(.*)' , redirect: '/teams'}
+    {path: '/', redirect: '/teams'},
+    {
+    name: 'teams',
+      path: '/teams', component: TeamsList, children: [
+        { name: 'team-members', path: ':teamId', component: TeamMembers, props: true }
+      ]
+    },
+    { path: '/users', component: UserList },
+    // { path: '/teams/:teamId', component: TeamMembers, props: true},
+    { path: '/:notFound(.*)', component: NotFound }
+    // {path: '/:notFound(.*)' , redirect: '/teams'}
   ],
 });
 

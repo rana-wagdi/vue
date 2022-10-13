@@ -1,11 +1,12 @@
 <template class="drag">
-  <div :class="mode">
+  <div :class="mode" @toggle="toggle">
     <div class="content">
       <header>
         <div class="header__todo"></div>
       </header>
+      
       <!-- <p class="drag">Drag and drop to reoder list</p> -->
-      <the-list v-bind="mode" />
+      <the-list :modeTheme="mode" />
     </div>
   </div>
 </template>
@@ -23,14 +24,16 @@ export default {
       mode: "dark",
     };
   },
-  provide() {
-    return {
-      mode: this.mode,
-    };
-
-  },
-  
-    
+  methods: {
+    toggle(){
+    if(this.mode == "dark"){
+      this.mode == 'light'
+    }else{
+      this.mode == 'dark'
+    }
+    console.log(this.mode)
+    }
+  }
 };
 </script>
 
