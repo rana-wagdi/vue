@@ -6,8 +6,7 @@
         <h1>TODO</h1>
       </div>
       <div>
-        <i  @click="themeMode('light')" class="bi bi-brightness-high-fill theme_icon"></i>
-        <!-- <i class="bi bi-moon"></i> -->
+        <i  @click="themeMode" class="bi theme_icon" :class="{ 'bi-brightness-high-fill' : isActive, 'bi-moon': !isActive }"></i>
       </div>
     </header>
     <div class="goal">
@@ -70,12 +69,13 @@ props: ['modeTheme'],
         },
       ],
       enterGoal: "",
-
       itemLength: "",
       checkedNames: [],
-      themeColor: this.modeTheme
+      themeColor: true,
+      isActive:true
     };
   },
+  
   methods: {
     addTask() {
       const enterValue = this.$refs.goal.value;
@@ -114,11 +114,19 @@ props: ['modeTheme'],
       let checkGoal = document.querySelectorAll(".goalCheck");
       console.log(checkGoal.length);
     },
-   
-    themeMode(option){
-    this.themeColor = option
-    console.log("l", this.themeColor)
+    themeMode(){
+    this.themeColor = !this.themeColor
+    this.isActive = !this.isActive
+    if(this.themeColor){
+      
+      console.log("a")
+      
     }
+    if(!this.themeColor){
+      console.log("b")
+    }
+    },
+    
   },
   mounted() {
     let checkGoal = document.querySelectorAll(".goalCheck");
