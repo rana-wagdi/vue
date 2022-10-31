@@ -1,12 +1,15 @@
-
 <template>
-  <div class="todo__content ">
+  <div class="todo__content">
     <header class="header_todo">
       <div>
         <h1>TODO</h1>
       </div>
       <div>
-        <i  @click="themeMode" class="bi theme_icon" :class="{ 'bi-brightness-high-fill' : isActive, 'bi-moon': !isActive }"></i>
+        <i
+          @click="themeMode"
+          class="bi theme_icon"
+          :class="{ 'bi-brightness-high-fill': isActive, 'bi-moon': !isActive }"
+        ></i>
       </div>
     </header>
     <div class="goal">
@@ -48,7 +51,7 @@
 import draggable from "vuedraggable";
 
 export default {
-props: ['modeTheme'],
+  props: ["modeTheme"],
   components: {
     draggable,
   },
@@ -71,11 +74,11 @@ props: ['modeTheme'],
       enterGoal: "",
       itemLength: "",
       checkedNames: [],
-      themeColor: true,
-      isActive:true
+      // themeColor: true,
+      isActive: true,
     };
   },
-  
+
   methods: {
     addTask() {
       const enterValue = this.$refs.goal.value;
@@ -114,19 +117,10 @@ props: ['modeTheme'],
       let checkGoal = document.querySelectorAll(".goalCheck");
       console.log(checkGoal.length);
     },
-    themeMode(){
-    this.themeColor = !this.themeColor
-    this.isActive = !this.isActive
-    if(this.themeColor){
-      
-      console.log("a")
-      
-    }
-    if(!this.themeColor){
-      console.log("b")
-    }
+    themeMode() {
+      this.isActive = !this.isActive;
+      this.$emit("change-mode", this.isActive);
     },
-    
   },
   mounted() {
     let checkGoal = document.querySelectorAll(".goalCheck");

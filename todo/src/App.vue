@@ -1,12 +1,11 @@
 <template class="drag">
-  <div :class="mode" @toggle="toggle">
+  <div :class="[isActive ? 'light': 'dark']" >
     <div class="content">
       <header>
         <div class="header__todo"></div>
       </header>
-      
       <!-- <p class="drag">Drag and drop to reoder list</p> -->
-      <the-list :modeTheme="mode" />
+      <the-list @change-mode= 'enableLightMode'/>
     </div>
   </div>
 </template>
@@ -21,18 +20,22 @@ export default {
   },
   data() {
     return {
-      mode: "dark",
+      isActive: false
     };
   },
   methods: {
-    toggle(){
-    if(this.mode == "dark"){
-      this.mode == 'light'
-    }else{
-      this.mode == 'dark'
+  
+    enableLightMode(isActive){
+      this.isActive = isActive
     }
-    console.log(this.mode)
-    }
+    // toggle(){
+    // if(this.mode == "dark"){
+    //   this.mode == 'light'
+    // }else{
+    //   this.mode == 'dark'
+    // }
+    // console.log(this.mode)
+    // }
   }
 };
 </script>
