@@ -2,6 +2,7 @@
 import App from './App.vue';
 import Vue from 'vue';
 import VueDragAndDropList from 'vue-drag-and-drop-list';
+import './styles/main.css'
 Vue.use(VueDragAndDropList);
 // import Vue from 'vue'
 // // import "../node_modules/bootstrap/scss/bootstrap";

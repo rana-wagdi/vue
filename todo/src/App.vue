@@ -1,17 +1,16 @@
 <template class="drag">
-  <div :class="[isActive ? 'light': 'dark']" >
+  <div :class="[isActive ? 'dark' : 'light']">
     <div class="content">
       <header>
         <div class="header__todo"></div>
       </header>
-      <!-- <p class="drag">Drag and drop to reoder list</p> -->
-      <the-list @change-mode= 'enableLightMode'/>
+      <the-list @change-mode="enableLightMode" />
     </div>
   </div>
 </template>
 
 <script>
-import TheList from "./components/todo-tasks/TheList.vue";
+import TheList from "./components/TheList.vue";
 
 export default {
   name: "App",
@@ -20,56 +19,17 @@ export default {
   },
   data() {
     return {
-      isActive: false
+      isActive: true,
     };
   },
   methods: {
-  
-    enableLightMode(isActive){
-      this.isActive = isActive
-    }
-    // toggle(){
-    // if(this.mode == "dark"){
-    //   this.mode == 'light'
-    // }else{
-    //   this.mode == 'dark'
-    // }
-    // console.log(this.mode)
-    // }
-  }
+    enableLightMode(isActive) {
+      this.isActive = isActive;
+    },
+  },
 };
 </script>
 
 <style>
-* {
-  padding: 0;
-  margin: 0;
-  font-family: "Josefin Sans", sans-serif;
-}
-.content {
-  text-align: center;
-  position: relative;
-  justify-content: center;
-  height: auto;
-  min-height: 100vh;
-}
-.drag {
-  margin-bottom: 4rem;
-  color: aliceblue;
-  background-color: hsl(235, 21%, 11%);
-}
-.header__todo {
-  background-image: url("./assets/bg-desktop-dark.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top;
-  height: 40vh;
-  z-index: 1111;
-}
-.dark {
-  background-color: hsl(235, 21%, 11%);
-}
-.light {
-  background-color: #fff;
-}
+
 </style>
