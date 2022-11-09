@@ -10,11 +10,6 @@
     height: auto;
     min-height: 100vh;
   }
-  .drag {
-    margin-bottom: 4rem;
-    color: aliceblue;
-    background-color: hsl(235, 21%, 11%);
-  }
   .header__todo{
     background-repeat: no-repeat;
     background-size: cover;

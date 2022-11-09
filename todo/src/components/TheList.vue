@@ -1,4 +1,7 @@
 <template>
+ <div :class="[isActive ? 'dark' : 'light']">
+    <div class="content">
+        <div class="header__todo"></div>
   <div class="todo__content">
     <header class="header_todo">
       <div>
@@ -44,6 +47,8 @@
         <p class="task_list">{{ itemLength }} items left</p>
       </draggable>
     </ul>
+  </div>
+  </div>
   </div>
 </template>
 
