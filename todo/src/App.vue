@@ -1,12 +1,5 @@
 <template class="drag">
-  <div :class="[isActive ? 'dark' : 'light']">
-    <div class="content">
-      <header>
-        <div class="header__todo"></div>
-      </header>
       <the-list @change-mode="enableLightMode" />
-    </div>
-  </div>
 </template>
 
 <script>
