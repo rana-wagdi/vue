@@ -18,10 +18,8 @@
         data(){
             return{
                 isActive: true,
-                
             }
         },
-        
         methods:{
         themeMode() {
           this.isActive = !this.isActive;
