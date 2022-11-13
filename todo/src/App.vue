@@ -1,5 +1,5 @@
-<template class="drag">
-      <the-list @change-mode="enableLightMode" />
+<template >
+      <the-list  />
 </template>
 
 <script>
@@ -12,17 +12,10 @@ export default {
   },
   data() {
     return {
-      isActive: true,
     };
   },
   methods: {
-    enableLightMode(isActive) {
-      this.isActive = isActive;
-    },
+
   },
 };
 </script>
-
-<style>
-
-</style>

@@ -3,31 +3,8 @@
     <div class="content">
         <div class="header__todo"></div>
   <div class="todo__content">
-    <header class="header_todo">
-      <div>
-        <h1>TODO</h1>
-      </div>
-      <div>
-        <i
-          @click="themeMode"
-          class="bi theme_icon"
-          :class="{ 'bi-brightness-high-fill': isActive, 'bi-moon': !isActive }"
-        ></i>
-      </div>
-    </header>
-    <div class="goal">
-      <div @click="resetTask" class="circle_goal">
-        <span class="circle_goal_item"></span>
-      </div>
-      <input
-        class="goal"
-        type="text"
-        ref="goal"
-        v-model="enterGoal"
-        placeholder="Create a new todo..."
-        @keyup.enter="addTask"
-      />
-    </div>
+    <header-todo @change-mode="enableLightMode"></header-todo>
+    <goal-todo :todoLists="todoLists"></goal-todo>
     <ul>
       <draggable>
         <li class="task_list" v-for="list in todoLists" :key="list.id">
@@ -54,11 +31,15 @@
 
 <script>
 import draggable from "vuedraggable";
+import HeaderTodo from './HeaderTodo.vue';
+import GoalTodo from './GoalTodo.vue';
 
 export default {
   props: ["modeTheme"],
   components: {
     draggable,
+    HeaderTodo,
+    GoalTodo
   },
   data() {
     return {
@@ -76,27 +57,14 @@ export default {
           task: "go to hoomme!",
         },
       ],
-      enterGoal: "",
+      // enterGoal: "",
       itemLength: "",
       checkedNames: [],
-      // themeColor: true,
       isActive: true,
     };
   },
 
   methods: {
-    addTask() {
-      const enterValue = this.$refs.goal.value;
-      if (this.enterGoal.length > 1) {
-        this.todoLists.push({
-          id: new Date().toISOString(),
-          task: enterValue,
-        });
-      } else {
-        alert("Please Insert Some Goals");
-      }
-      this.enterGoal = "";
-    },
     removeTask(taskId) {
       const getTaskId = this.todoLists.find((ele) => ele.id == taskId);
       console.log(taskId);
@@ -115,9 +83,6 @@ export default {
       }
       this.todoLists.splice(todoELePosition, 1);
     },
-    resetTask() {
-      this.enterGoal = "";
-    },
     listLength() {
       let checkGoal = document.querySelectorAll(".goalCheck");
       console.log(checkGoal.length);
@@ -125,6 +90,9 @@ export default {
     themeMode() {
       this.isActive = !this.isActive;
       this.$emit("change-mode", this.isActive);
+    },
+    enableLightMode(isActive) {
+      this.isActive = isActive;
     },
   },
   mounted() {
