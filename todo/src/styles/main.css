@@ -31,7 +31,7 @@
     transition: 1s ease-in-out;
   }
   .light {
-    background-color: hsl(0, 0%, 98%);
+    background-color:  hsl(236, 33%, 92%);
     transition: 1s ease-in-out;
   }
 .todo__content {
@@ -94,18 +94,21 @@
   }
   .dark .task_list {
     background-color: hsl(235, 24%, 19%);
+    transition: 1s ease-in-out;
 
   }
   .light .task_list{
     background-color:  hsl(0, 0%, 98%);
+    transition: 1s ease-in-out;
+    
   }
   .task_list:first-child {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
   .task_list:last-child {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    /* border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px; */
   }
   .task_list_text {
     margin: 0.5rem 1rem;
@@ -157,9 +160,13 @@
   }
   .dark .goalCheck {
     background-color: hsl(235, 24%, 19%);
+    transition: 1s ease-in-out;
+    
   }
   .light .goalCheck{
     background-color:   hsl(0, 0%, 98%);
+    transition: 1s ease-in-out;
+    
   }
   .goalCheck[type="checkbox"] {
     width: 1.5rem;
@@ -180,10 +187,14 @@
   .dark .goalCheck[type="checkbox"]{
     background-color: hsl(235, 24%, 19%);
     transition: background 300ms;
+    transition: 1s ease-in-out;
+
   }
   .light .goalCheck[type="checkbox"]{
     background-color:   hsl(0, 0%, 98%);
     transition: background 300ms;
+    transition: 1s ease-in-out;
+
 
   }
   .goalCheck[type="checkbox"]:hover {
