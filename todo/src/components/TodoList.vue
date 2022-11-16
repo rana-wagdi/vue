@@ -9,7 +9,7 @@
               class="goalCheck"
               :value="list.id"
               type="checkbox"
-              v-model="checkedNames"
+              v-model="list.completed"
             />
             <span class="task_list_text">{{ list.task }}</span>
           </div>
@@ -18,7 +18,7 @@
           ></span>
         </li>
       </draggable>
-    <footer-todo :listLength="itemLength"></footer-todo>
+      <footer-todo :listLength="itemLength" :active="activeTodo" :completed="completed"></footer-todo>
     </ul>
   </div>
 </template>
@@ -40,20 +40,25 @@ export default {
         {
           id: "try to die",
           task: "try to die",
+          completed: false,
         },
         {
           id: "study",
           task: "study",
+          completed: false,
         },
         {
           id: "go to hoomme!",
           task: "go to hoomme!",
+          completed: false,
         },
       ],
       // enterGoal: "",
+
       itemLength: 0,
-      checkedNames: [],
-      notChecked: []
+      completedTodo: [],
+      notChecked: [],
+      checkTodo: [],
     };
   },
   methods: {
@@ -62,31 +67,52 @@ export default {
       const todoELePosition = this.todoLists.indexOf(getTaskId);
       this.todoLists.splice(todoELePosition, 1);
     },
-    listLength() {
-      let checkGoal = document.querySelectorAll(".goalCheck");
-      console.log(checkGoal.length);
+    completed() {
+      this.completedTodo = this.todoLists.filter((ele) => ele.completed);
+      this.todoLists = this.completedTodo
     },
 
-  },
-  mounted() {
-      // this.itemLength =  this.notChecked.length
-    },
-    updated() {
-      let checkGoal = document.querySelectorAll(".goalCheck");
-     for(let i of checkGoal){
-      if(i.checked == false){
-        // console.log("i", i.value)
-        
-        this.notChecked.push(i.value)
-        
+    activeTodo() {
+     this.todoLists = this.todoLists.filter((ele)=> !ele.completed)
       }
-     
-     }
-     console.log()
-    //  this.itemLength= this.notChecked.length
-    //  let a = checkGoal.filter(this.checkedNames)
-     console.log(this.checkedNames)
-      // this.itemLength = checkGoal.length;
     },
+    // allTodo(){
+     
+    // },
+ 
+
+  mounted() {
+    // this.itemLength =  this.notChecked.length
+  },
+  updated() {
+    // console.log("gA",this.todoLists.completed)
+    //   let a=this.todoLists.filter(this.checkedNames)
+    // console.log(a)
+    // console.log(this.checkedNames)
+    // for (let i of this.checkedNames){
+    // //  let a = this.todoLists.find((el)=> el.id == i )
+    //  let a =this.todoLists.filter((el)=>el.id == i)
+    //  console.log("a",a)
+    //  const todoELePosition = this.todoLists.indexOf(a);
+    //  this.todoLists.splice(todoELePosition, 1);
+
+    //  console.log("a",todoELePosition)
+    // }
+   
+  },
+  // checkGoal.filter()
+  // console.log(i)
+  // console.log("i", i.value)
+  // console.log()
+  // console.log("i",i.value)
+  //      let a=i.filter(this.checkedNames)
+  // console.log(a)
 };
+// console.log(this.notChecked)
+
+//  console.log(this.notChecked)
+//  this.itemLength= this.notChecked.length
+//  let a = checkGoal.filter(this.checkedNames)
+//  console.log(this.checkedNames)
+// this.itemLength = checkGoal.length;
 </script>
