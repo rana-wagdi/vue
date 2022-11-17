@@ -18,7 +18,12 @@
           ></span>
         </li>
       </draggable>
-      <footer-todo :listLength="itemLength" :active="activeTodo" :completed="completed"></footer-todo>
+      <footer-todo
+        :listLength="itemLength"
+        :all="allTodo"
+        :active="activeTodo"
+        :completed="completed"
+      ></footer-todo>
     </ul>
   </div>
 </template>
@@ -56,10 +61,23 @@ export default {
       // enterGoal: "",
 
       itemLength: 0,
+      todoL: [],
       completedTodo: [],
       notChecked: [],
       checkTodo: [],
     };
+  },
+  watch: {
+    todoLists: {
+      handler() {
+        this.todoL = this.todoLists;
+
+        console.log(this.todoL);
+        this.completedTodo = this.todoL.filter((ele) => ele.completed);
+        this.notChecked = this.todoL.filter((ele) => !ele.completed);
+      },
+      deep: true,
+    },
   },
   methods: {
     removeTask(taskId) {
@@ -67,24 +85,30 @@ export default {
       const todoELePosition = this.todoLists.indexOf(getTaskId);
       this.todoLists.splice(todoELePosition, 1);
     },
+    allTodo() {
+      this.todoLists = this.todoL;
+    },
     completed() {
-      this.completedTodo = this.todoLists.filter((ele) => ele.completed);
-      this.todoLists = this.completedTodo
+      // this.completedTodo = this.todoLists.filter((ele) => ele.completed);
+      // this.todoLists = this.completedTodo;
+      this.todoLists = this.completedTodo;
     },
 
     activeTodo() {
-     this.todoLists = this.todoLists.filter((ele)=> !ele.completed)
-      }
+      this.todoLists = this.notChecked;
     },
-    // allTodo(){
-     
-    // },
- 
+  },
+  // allTodo(){
+
+  // },
 
   mounted() {
     // this.itemLength =  this.notChecked.length
   },
   updated() {
+    this.todoL = this.todoLists;
+
+    console.log(this.todoL);
     // console.log("gA",this.todoLists.completed)
     //   let a=this.todoLists.filter(this.checkedNames)
     // console.log(a)
@@ -95,10 +119,8 @@ export default {
     //  console.log("a",a)
     //  const todoELePosition = this.todoLists.indexOf(a);
     //  this.todoLists.splice(todoELePosition, 1);
-
     //  console.log("a",todoELePosition)
     // }
-   
   },
   // checkGoal.filter()
   // console.log(i)
