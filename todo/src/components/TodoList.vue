@@ -3,7 +3,7 @@
     <goal-todo :todoLists="todoLists"></goal-todo>
     <ul>
       <draggable>
-        <li class="task_list" v-for="list in todoLists" :key="list.id">
+        <li class="task_list" v-for="list in setFilter" :key="list.id">
           <div class="task_list_content">
             <input
               class="goalCheck"
@@ -18,12 +18,19 @@
           ></span>
         </li>
       </draggable>
-      <footer-todo
+      <div>
+      <span>{{itemLength}}</span>
+        <span @click="filterTodo('all')">all</span>
+        <span @click="filterTodo('active')" >active</span>
+
+        <span @click="filterTodo('complete')">complete</span>
+      </div>
+      <!-- <footer-todo
         :listLength="itemLength"
-        :all="allTodo"
-        :active="activeTodo"
-        :completed="completed"
-      ></footer-todo>
+        :all="filterTodo('all')"
+        :active="filterTodo('active')"
+        :completed="activeTodo"
+      ></footer-todo> -->
     </ul>
   </div>
 </template>
@@ -31,13 +38,13 @@
 <script>
 import draggable from "vuedraggable";
 import GoalTodo from "./GoalTodo.vue";
-import FooterTodo from "./FooterTodo.vue";
+// import FooterTodo from "./FooterTodo.vue";
 
 export default {
   components: {
     draggable,
     GoalTodo,
-    FooterTodo,
+    // FooterTodo,
   },
   data() {
     return {
@@ -55,86 +62,51 @@ export default {
         {
           id: "go to hoomme!",
           task: "go to hoomme!",
-          completed: false,
+          completed: true,
         },
       ],
-      // enterGoal: "",
-
       itemLength: 0,
-      todoL: [],
-      completedTodo: [],
-      notChecked: [],
-      checkTodo: [],
+
+      type: "all",
     };
   },
-  watch: {
-    todoLists: {
-      handler() {
-        this.todoL = this.todoLists;
-
-        console.log(this.todoL);
-        this.completedTodo = this.todoL.filter((ele) => ele.completed);
-        this.notChecked = this.todoL.filter((ele) => !ele.completed);
-      },
-      deep: true,
-    },
-  },
+  
   methods: {
+    filterTodo(type) {
+      this.type = type;
+      console.log("type", type);
+    },
     removeTask(taskId) {
       const getTaskId = this.todoLists.find((ele) => ele.id == taskId);
       const todoELePosition = this.todoLists.indexOf(getTaskId);
       this.todoLists.splice(todoELePosition, 1);
     },
-    allTodo() {
-      this.todoLists = this.todoL;
-    },
-    completed() {
-      // this.completedTodo = this.todoLists.filter((ele) => ele.completed);
-      // this.todoLists = this.completedTodo;
-      this.todoLists = this.completedTodo;
-    },
 
-    activeTodo() {
-      this.todoLists = this.notChecked;
+  },
+  computed: {
+    setFilter() {
+      return this.todoLists.filter((ele) => {
+        switch (this.type) {
+          case "all":
+            return ele;
+          case "complete":
+            return ele.completed;
+          case 'active':
+            return !ele.completed
+        }
+      });
     },
   },
-  // allTodo(){
-
-  // },
 
   mounted() {
-    // this.itemLength =  this.notChecked.length
+    let itemLen = this.todoLists.filter((ele)=> !ele.completed)
+    this.itemLength = itemLen.length
   },
   updated() {
-    this.todoL = this.todoLists;
-
-    console.log(this.todoL);
-    // console.log("gA",this.todoLists.completed)
-    //   let a=this.todoLists.filter(this.checkedNames)
-    // console.log(a)
-    // console.log(this.checkedNames)
-    // for (let i of this.checkedNames){
-    // //  let a = this.todoLists.find((el)=> el.id == i )
-    //  let a =this.todoLists.filter((el)=>el.id == i)
-    //  console.log("a",a)
-    //  const todoELePosition = this.todoLists.indexOf(a);
-    //  this.todoLists.splice(todoELePosition, 1);
-    //  console.log("a",todoELePosition)
-    // }
+    let itemLen = this.todoLists.filter((ele)=> !ele.completed)
+    this.itemLength = itemLen.length
   },
-  // checkGoal.filter()
-  // console.log(i)
-  // console.log("i", i.value)
-  // console.log()
-  // console.log("i",i.value)
-  //      let a=i.filter(this.checkedNames)
-  // console.log(a)
-};
-// console.log(this.notChecked)
 
-//  console.log(this.notChecked)
-//  this.itemLength= this.notChecked.length
-//  let a = checkGoal.filter(this.checkedNames)
-//  console.log(this.checkedNames)
-// this.itemLength = checkGoal.length;
+};
+
 </script>
