@@ -30,6 +30,7 @@ data(){
         this.todoList.push({
           id: new Date().toISOString(),
           task: enterValue,
+          completed: false
         });
       } else {
         alert("Please Insert Some Goals");
