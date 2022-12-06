@@ -76,7 +76,14 @@ export default {
       enterGoal: "",
     };
   },
-  watch: {},
+  watch: {
+    todoLists: {
+      handler() {
+        localStorage.setItem("todoList", JSON.stringify(this.todoLists));
+      },
+      deep: true,
+    },
+  },
   methods: {
     addTask() {
       const enterValue = this.$refs.goal.value;
@@ -122,13 +129,16 @@ export default {
     },
   },
   mounted() {
+    this.todoLists = JSON.parse(
+      localStorage.getItem("todoList") || this.todoLists
+    );
     let itemLen = this.todoLists.filter((ele) => !ele.completed);
     this.itemLength = itemLen.length;
-   
   },
   updated() {
     let itemLen = this.todoLists.filter((ele) => !ele.completed);
     this.itemLength = itemLen.length;
+    // localStorage.setItem('todoList', JSON.stringify(this.todoLists))
   },
 };
 </script>
