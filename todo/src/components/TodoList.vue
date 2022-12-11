@@ -16,8 +16,13 @@
     <!-- <goal-todo  :todoLists="todoLists"></goal-todo> -->
     <ul>
       <draggable>
+        <div class="task_list empty_todo" v-if="todoLists.length == 0">
+          <p class="empty">There's No Todo</p>
+        </div>
+
         <li class="task_list" v-for="list in setFilter(type)" :key="list.id">
           <div class="task_list_content">
+          <label>
             <input
               class="goalCheck"
               :value="list.id"
@@ -25,6 +30,7 @@
               v-model="list.completed"
             />
             <span class="task_list_text">{{ list.task }}</span>
+          </label>
           </div>
           <span @click="removeTask(list.id)"
             ><i class="bi bi-x-circle close_icon"></i
@@ -48,29 +54,12 @@ import FooterTodo from "./FooterTodo.vue";
 export default {
   components: {
     draggable,
-
     // GoalTodo,
     FooterTodo,
   },
   data() {
     return {
-      todoLists: [
-        {
-          id: "try to die",
-          task: "try to die",
-          completed: false,
-        },
-        {
-          id: "study",
-          task: "study",
-          completed: false,
-        },
-        {
-          id: "go to hoomme!",
-          task: "go to hoomme!",
-          completed: true,
-        },
-      ],
+      todoLists: [],
       itemLength: 0,
       type: "all",
       enterGoal: "",
@@ -102,16 +91,17 @@ export default {
       this.enterGoal = "";
     },
     removeTask(taskId) {
+      var result = confirm("Do you want Delete completed TODO are you sure? ");
+      if (result) {
       const getTaskId = this.todoLists.find((ele) => ele.id == taskId);
       const todoELePosition = this.todoLists.indexOf(getTaskId);
       this.todoLists.splice(todoELePosition, 1);
+      }
     },
     removeAllCheckedTodo() {
       var result = confirm("Do you want Delete completed TODO are you sure? ");
       if (result) {
         this.todoLists = this.todoLists.filter((ele) => !ele.completed);
-        // removeCompletedTodo
-        // this.todoLists = removeCompletedTodo
       }
     },
     setFilter(type) {
@@ -138,7 +128,6 @@ export default {
   updated() {
     let itemLen = this.todoLists.filter((ele) => !ele.completed);
     this.itemLength = itemLen.length;
-    // localStorage.setItem('todoList', JSON.stringify(this.todoLists))
   },
 };
 </script>
