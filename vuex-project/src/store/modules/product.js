@@ -1,5 +1,6 @@
 export default {
-    store(){
+    namespaced: true,
+    state(){
         return{
             products: [  {
                 id: 'p1',
@@ -28,6 +29,11 @@ export default {
                 price: 6.99,
               },
             ]
+        }
+    },
+    getters: {
+        products(state){
+            return state.products
         }
     }
 }
