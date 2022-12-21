@@ -23,7 +23,6 @@
 
 <script>
 export default {
-  inject: ['removeProductFromCart'],
   props: ['prodId', 'title', 'image', 'price', 'qty'],
   computed: {
     itemTotal() {
@@ -32,7 +31,10 @@ export default {
   },
   methods: {
     remove() {
-      this.removeProductFromCart(this.prodId);
+    // return this.$store.dispatch('cart/removeFromCart', this.prodId)
+    return this.$store.dispatch('cart/removeFromCart', {productId:this.prodId})
+
+      // this.removeProductFromCart(this.prodId);
     }
   }
 };
