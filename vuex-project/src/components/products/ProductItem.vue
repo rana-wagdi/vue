@@ -20,7 +20,6 @@
 
 <script>
 export default {
-  // inject: ['addProductToCart'],
   props: ['id', 'image', 'title', 'price', 'description'],
   methods: {
     addToCart() {
