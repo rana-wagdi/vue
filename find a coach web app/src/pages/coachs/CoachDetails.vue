@@ -36,6 +36,20 @@ export default {
       selectedCoach: null,
     };
   },
+  computed:{
+    fullName(){
+      return this.selectedCoach.firstName + ' ' + this.selectedCoach.lastName
+    },
+    rate(){
+      return this.selectedCoach.hourlyRate
+    },
+    areas(){
+      return this.selectedCoach.areas
+    },
+    description(){
+      return this.selectedCoach.description
+    },
+  },
   created() {
     this.selectedCoach = this.$store.getters['coaches/coaches'].find(
       (coach) => coach.id === this.id
