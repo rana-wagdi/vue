@@ -2,7 +2,11 @@ import { createStore } from 'vuex'
 
 const getDefaultUser = () => {
   return {
-    firstName: '',
+    nameOfOrgnization: '',
+    activeOfOrgnization:'',
+    city:'',
+    government:'',
+    chooseOption:null
   }
 }
 
@@ -12,8 +16,20 @@ export default createStore({
     user: getDefaultUser(),
   },
   mutations: {
-    updateFirstName(state, payload) {
-      state.user.firstName = payload
+    updateNameOfOrgnization(state, payload) {
+      state.user.nameOfOrgnization = payload
+    },
+    updateActiveOfOrgnization(state, payload){
+        state.user.activeOfOrgnization = payload
+    },
+    updateCity(state, payload){
+        state.user.city = payload
+    },
+    updateGovernment(state, payload){
+        state.user.government = payload
+    },
+    updateChooseOption(state, payload){
+        state.user.chooseOption = payload
     },
   },
 

@@ -1,7 +1,7 @@
-<template>
+<template  lang="ar">
   <h1>hello</h1>
   <form>
-    <component  :is="this.stepsList[this.currentStep]"> </component>
+    <component :currentPage="currentStep" :is="this.stepsList[this.currentStep]"> </component>
     <p @click="pervious">back</p>
     <p @click="next">to</p>
   </form>
@@ -31,9 +31,14 @@ export default {
         if(this.currentStep < 1){
         this.currentStep++
         }
-        
+
     }
 
   }
 };
 </script>
+<style>
+    *{
+        direction: rtl;
+    }
+</style>
