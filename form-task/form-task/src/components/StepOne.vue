@@ -1,44 +1,61 @@
 <template>
-  <h1>نموذج طلب المنتج"هندسة الموسم"</h1>
-  <h3><span>*</span>بيانات المنظمه</h3>
-  <label for="nameOfOrgnization">اسم المنظمة</label><br />
-  <input
-    type="text"
-    name="nameOfOrgnization"
-    id="nameOfOrgnization"
-    v-model="nameOfOrgnization"
-  /><br />
-  <label for="activeOfOrgnization">نشاط المنظمة </label><br />
-  <input
-    type="text"
-    name="acriveOfOrgnization"
-    id="activeOfOrgnization"
-    v-model="activeOfOrgnization"
-  /><br />
-  <label for="city">المنطقة</label><br />
-  <input type="text" name="city" id="city" v-model="city" />
-  <label for="government">المركز / المحافظه</label><br />
-  <input type="text" name="government" id="government" v-model="government" />
-  <h3>الباقة المطلوبة</h3>
-  <label for="chooseOption"></label>
-  <input type="number" name="chooseOption" id="chooseOption" v-model="chooseOption" />
-<p @click="nextPage">التالى</p>
+  <div class="container stepOne">
+    <h1>نموذج طلب المنتج"هندسة الموسم"</h1>
+    <h3>بيانات المنظمة</h3>
+    <div class="stepOne__items">
+      <div class="stopOne_content">
+        <label for="nameOfOrgnization"> اسم المنظمة<span>*</span></label
+        ><br />
+        <input
+          type="text"
+          name="nameOfOrgnization"
+          id="nameOfOrgnization"
+          v-model="nameOfOrgnization"
+        /><br />
+      </div>
+      <div class="stopOne_content">
+        <label for="activeOfOrgnization"> نشاط المنظمة<span>*</span></label
+        ><br />
+        <input
+          type="text"
+          name="acriveOfOrgnization"
+          id="activeOfOrgnization"
+          v-model="activeOfOrgnization"
+        /><br />
+      </div>
+      <div class="stopOne_content">
+        <label for="city"> المدينة<span>*</span></label
+        ><br />
+        <input type="text" name="city" id="city" v-model="city" />
+      </div>
+      <div class="stopOne_content">
+        <label for="government">المركز/المحافظه<span>*</span></label
+        ><br />
+        <input
+          type="text"
+          name="government"
+          id="government"
+          v-model="government"
+        />
+      </div>
+    </div>
+    <h3>الباقة المطلوبة</h3>
+    <div class="chooseOption">
+      <label for="chooseOption">اختر الباقة<span>*</span></label
+      ><br />
+      <input
+        type="number"
+        name="chooseOption"
+        id="chooseOption"
+        v-model="chooseOption"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    props:{ currentPage: Number},
-    // data(){
-    //     return{
-    //             numberOfPage: this.currentPage
-    //     }
-    // },
-    methods:{
-        nextPage(){
-            this.currentPage
-console.log(this.urrentPage)
-        }
-    },
+  methods: {},
   computed: {
     nameOfOrgnization: {
       get() {
@@ -83,3 +100,11 @@ console.log(this.urrentPage)
   },
 };
 </script>
+<style scoped>
+
+/* .chooseOption {
+  text-align: right;
+  width: 60%;
+  margin: auto;
+} */
+</style>
