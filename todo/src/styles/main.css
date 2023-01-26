@@ -39,7 +39,7 @@
   width: 47%;
   margin: -17rem auto;
   text-align: left;
-  padding: 5rem 0 1rem 0;
+  padding: 5rem 0 5rem 0;
   font-family: "Josefin Sans", sans-serif;
   /* position: absolute; */
   top: 30px;
@@ -80,6 +80,7 @@ li {
 }
 .light .goal {
   background-color: hsl(0, 0%, 98%);
+  color: #393a4c;
 }
 .task_list_content {
   position: relative;
@@ -253,7 +254,14 @@ input:focus {
 .light .clear:hover{
   color: hsl(235, 19%, 35%);
 }
+.empty_todo{
+  display: block !important;
+  text-align: center;
+}
+.empty{
+  color: red;
 
+}
 @media (max-width: 1000px) {
   .todo__content {
     width: 80%;

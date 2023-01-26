@@ -1,10 +1,28 @@
 <template>
   <div>
-    <goal-todo :todoLists="todoLists"></goal-todo>
+    <div class="goal">
+      <div @click="resetTask" class="circle_goal">
+        <span class="circle_goal_item"></span>
+      </div>
+      <input
+        class="goal"
+        type="text"
+        ref="goal"
+        v-model="enterGoal"
+        placeholder="Create a new todo..."
+        @keyup.enter="addTask"
+      />
+    </div>
+    <!-- <goal-todo  :todoLists="todoLists"></goal-todo> -->
     <ul>
       <draggable>
+        <div class="task_list empty_todo" v-if="todoLists.length == 0">
+          <p class="empty">There's No Todo</p>
+        </div>
+
         <li class="task_list" v-for="list in setFilter(type)" :key="list.id">
           <div class="task_list_content">
+          <label>
             <input
               class="goalCheck"
               :value="list.id"
@@ -12,90 +30,98 @@
               v-model="list.completed"
             />
             <span class="task_list_text">{{ list.task }}</span>
+          </label>
           </div>
           <span @click="removeTask(list.id)"
             ><i class="bi bi-x-circle close_icon"></i
           ></span>
         </li>
       </draggable>
-      <footer-todo :listLength="itemLength" @set="setFilter"></footer-todo>
+      <footer-todo
+        @removeTodo="removeAllCheckedTodo"
+        :listLength="itemLength"
+        @set="setFilter"
+      ></footer-todo>
     </ul>
   </div>
 </template>
 
 <script>
 import draggable from "vuedraggable";
-import GoalTodo from "./GoalTodo.vue";
+// import GoalTodo from "./GoalTodo.vue";
 import FooterTodo from "./FooterTodo.vue";
 
 export default {
   components: {
     draggable,
-    GoalTodo,
+    // GoalTodo,
     FooterTodo,
   },
   data() {
     return {
-      todoLists: [
-        {
-          id: "try to die",
-          task: "try to die",
-          completed: false,
-        },
-        {
-          id: "study",
-          task: "study",
-          completed: false,
-        },
-        {
-          id: "go to hoomme!",
-          task: "go to hoomme!",
-          completed: true,
-        },
-      ],
+      todoLists: [],
       itemLength: 0,
       type: "all",
+      enterGoal: "",
     };
   },
-  watch: {},
+  watch: {
+    todoLists: {
+      handler() {
+        localStorage.setItem("todoList", JSON.stringify(this.todoLists));
+      },
+      deep: true,
+    },
+  },
   methods: {
+    addTask() {
+      const enterValue = this.$refs.goal.value;
+      if (this.enterGoal.length > 0) {
+        this.todoLists.push({
+          id: new Date().toISOString(),
+          task: enterValue,
+          completed: false,
+        });
+      } else {
+        alert("Please Insert Some Goals");
+      }
+      this.enterGoal = "";
+    },
+    resetTask() {
+      this.enterGoal = "";
+    },
     removeTask(taskId) {
+      var result = confirm("Do you want Delete completed TODO are you sure? ");
+      if (result) {
       const getTaskId = this.todoLists.find((ele) => ele.id == taskId);
       const todoELePosition = this.todoLists.indexOf(getTaskId);
       this.todoLists.splice(todoELePosition, 1);
+      }
+    },
+    removeAllCheckedTodo() {
+      var result = confirm("Do you want Delete completed TODO are you sure? ");
+      if (result) {
+        this.todoLists = this.todoLists.filter((ele) => !ele.completed);
+      }
     },
     setFilter(type) {
       this.type = type;
-      if (type === "clear") {
-        this.todoLists.forEach((ele) => {
-          if (ele.completed) {
-            let indexOfCompletedTodo = this.todoLists.indexOf(ele);
-            var result = confirm('Do you want Delete completed TODO are you sure? ')
-            if(result){
-              this.todoLists.splice(indexOfCompletedTodo, 1);
-
-            }
-          }
-          this.type = "all";
-          return this.todoLists;
-        });
-      } else
-        return this.todoLists.filter((ele) => {
-          switch (type) {
-            case "all":
-              return ele;
-            case "complete":
-              return ele.completed;
-            case "active":
-              return !ele.completed;
-          }
-        });
-    },
-    clearCompleted() {
-      return this.todoLists.filter((ele) => !ele.completed);
+      return this.todoLists.filter((ele) => {
+        switch (type) {
+          case "all":
+            return ele;
+          case "complete":
+            return ele.completed;
+          case "active":
+            return !ele.completed;
+        }
+      });
     },
   },
   mounted() {
+    this.todoLists = JSON.parse(
+      localStorage.getItem("todoList") || this.todoLists
+    );
     let itemLen = this.todoLists.filter((ele) => !ele.completed);
     this.itemLength = itemLen.length;
   },

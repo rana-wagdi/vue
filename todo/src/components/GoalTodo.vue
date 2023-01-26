@@ -9,7 +9,7 @@
       ref="goal"
       v-model="enterGoal"
       placeholder="Create a new todo..."
-      @keyup.enter="addTask"
+      @keyup.enter="$emit('addTask')"
     />
   </div>
 </template>
@@ -26,8 +26,8 @@ data(){
   methods: {
     addTask() {
       const enterValue = this.$refs.goal.value;
-      if (this.enterGoal.length > 1) {
-        this.todoList.push({
+      if (this.enterGoal.length > 0) {
+      this.todoList =this.todoList.push({
           id: new Date().toISOString(),
           task: enterValue,
           completed: false
